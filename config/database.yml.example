@@ -1,0 +1,14 @@
+common: &common
+  adapter: postgresql
+  username: david
+  host: localhost
+  password:
+  min_messages: warning
+
+development:
+  <<: *common
+  database: template_dev
+
+test:
+  <<: *common
+  database: template_test

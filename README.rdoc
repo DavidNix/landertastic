@@ -1,28 +1,16 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Prerequesites
+* latest version of rvm
+* setup to be heroku friendly (including using postgres for development and test environments)
 
-Things you may want to cover:
+* Do a find replace for the name of the app (so it's not Template)
 
-* Ruby version
+* Change database.yml.sample to match your environment (remove .sample of course)
 
-* System dependencies
+* change .ruby-version
 
-* Configuration
+* Change exception notifier config in production.rb to match your settings.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Be sure your env has the secret token, instructions in the secret_token initializer - don't use the secret token in this .env!
+# You can use `rake secret` to generate a secure secret key.

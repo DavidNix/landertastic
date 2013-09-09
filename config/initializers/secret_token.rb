@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Template::Application.config.secret_key_base = '84ee2074c4fa403abcde926eaa1d9131c1420c4f235fe01edfccf9240de297db05197e22a36284799553bba6d26a705a38dc8ddd9f8f8e6ed36883b1b5a8dc22'
+Template::Application.config.secret_key_base = ENV['SECRET_TOKEN']

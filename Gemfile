@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgres as the database for Active Record (Heroku Requirement)
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -25,11 +27,26 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+#gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :production do
+  # automatically email exceptions
+  gem 'exception_notification'
+end
+
+group :development, :test do
+  # Load environment variables
+  gem 'dotenv-rails'
+end
+
+group :development do
+  # init processes via Procfile (used by Heroku)
+  gem 'foreman'
 end
 
 # Use ActiveModel has_secure_password

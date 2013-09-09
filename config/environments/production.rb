@@ -77,4 +77,12 @@ Template::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Automatically email exceptions
+  Template::Application.config.middleware.use ExceptionNotification::Rack,
+    :email => {
+        :email_prefix => "[#{Rails.application.class.parent_name}:  #{Rails.env} ERROR] ",
+        :sender_address => %{"notifier" <notifier@changeme.com>},
+        :exception_recipients => %w{exceptions@changeme.com}
+    }
 end
