@@ -29,6 +29,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 #gem 'jbuilder', '~> 1.2'
 
+# use pry instead of irb
+gem 'pry'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -42,18 +45,33 @@ end
 group :development, :test do
   # Load environment variables
   gem 'dotenv-rails'
+
+  # use rspec as the test suite
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'faker'
+
+  # integration tests
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'launchy'
+
+  # use rspec acceptance tests to generate api docs
+  #gem "rspec_api_documentation"
 end
 
 group :development do
+  # use better errors instead of default rails exception pages
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
   # init processes via Procfile (used by Heroku)
   gem 'foreman'
 end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
