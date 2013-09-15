@@ -1,16 +1,23 @@
-== README
+Just a Rails 4 Template
+=======================
 
-Prerequesites
-* latest version of rvm
-* setup to be heroku friendly (including using postgres for development and test environments)
+A starter template for Rails 4 for deploying to Heroku.
 
-* Do a find replace for the name of the app (so it's not Template)
+## Configuration
+* Rspec for test suite
+* Puma for web server
+* Pry instead of Irb
+* Postgres for dev and test environments to mimic heroku.
 
-* Change database.yml.sample to match your environment (remove .sample of course)
+## Setup
+If you use `rvm`, change `.ruby-version` and `.ruby-gemset` to match your rvm settings.
 
-* change .ruby-version
+Change the name of the application `Template` module in `application.rb`.
 
-* Change exception notifier config in production.rb to match your settings.
+Do a find/replace for `Application::Template` and change it to the name of your application.
 
-* Be sure your env has the secret token, instructions in the secret_token initializer - don't use the secret token in this .env!
-# You can use `rake secret` to generate a secure secret key.
+Rename `database.yml.sample` to match your environment settings.
+
+Change `exception notifier` config in `production.rb` to match your email settings.
+
+**IMPORTANT!!!**  When deploying to Heroku, set up env variable `SECRET_TOKEN`.  Use `rake secret` to generate a new one.
