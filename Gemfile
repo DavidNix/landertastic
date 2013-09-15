@@ -8,6 +8,9 @@ gem 'rails', '4.0.0'
 # Use postgres as the database for Active Record (Heroku Requirement)
 gem 'pg'
 
+# multi-threaded web server
+gem 'puma'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -56,6 +59,9 @@ group :development, :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'launchy'
+
+  # fake external requests
+  # gem 'fakeweb'
 
   # use rspec acceptance tests to generate api docs
   #gem "rspec_api_documentation"
