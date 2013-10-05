@@ -25,3 +25,4 @@ public/api_doc
 .DS_Store
 dump.rdb
 db/schema.rb
+.env
