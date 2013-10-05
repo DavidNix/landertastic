@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Template::Application.load_tasks
+Landertastic::Application.load_tasks

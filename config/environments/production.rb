@@ -1,4 +1,4 @@
-Template::Application.configure do
+Landertastic::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -79,10 +79,10 @@ Template::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Automatically email exceptions
-  Template::Application.config.middleware.use ExceptionNotification::Rack,
-    :email => {
-        :email_prefix => "[#{Rails.application.class.parent_name}:  #{Rails.env} ERROR] ",
-        :sender_address => %{"notifier" <notifier@changeme.com>},
-        :exception_recipients => %w{exceptions@changeme.com}
-    }
+  #Landertastic::Application.config.middleware.use ExceptionNotification::Rack,
+  #  :email => {
+  #      :email_prefix => "[#{Rails.application.class.parent_name}:  #{Rails.env} ERROR] ",
+  #      :sender_address => %{"notifier" <notifier@changeme.com>},
+  #      :exception_recipients => %w{exceptions@changeme.com}
+  #  }
 end
