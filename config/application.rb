@@ -29,6 +29,9 @@ module Landertastic
 
     # config generators for rspec
     config.generators do |g|
+      g.assets false
+      g.helper false
+      g.template_engine :haml
       g.test_framework :rspec,
         fixtures: true,
         view_specs: false,

@@ -32,6 +32,10 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 #gem 'jbuilder', '~> 1.2'
 
+# Use haml as default template engine
+gem 'haml'
+gem 'haml-rails'
+
 # use pry instead of irb
 gem 'pry'
 
