@@ -40,10 +40,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :production do
-  # automatically email exceptions
-  gem 'exception_notification'
-end
+#group :production do
+#  # automatically email exceptions
+#  gem 'exception_notification'
+#end
 
 group :development, :test do
   # Load environment variables
@@ -74,6 +74,10 @@ group :development do
 
   # init processes via Procfile (used by Heroku)
   gem 'foreman'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 # Use ActiveModel has_secure_password
