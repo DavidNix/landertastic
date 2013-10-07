@@ -20,6 +20,8 @@ module Landertastic
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.filter_parameters += [:password, :username]
+
     console do
       # this block is called only when running console,
       # so we can safely require pry here
