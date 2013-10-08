@@ -1,8 +1,13 @@
 Landertastic::Application.routes.draw do
   root "home#index"
+  get "/admin" => "admin/sessions#new"
 
   namespace :admin do
-    resources :sessions, only: [:new, :create, :destroy]
+    resources :sessions, only: [:new, :create]
+    delete "/sessions" => "sessions#destroy"
+
+    resources :statistics, only: [:index]
+    delete "/statistics" => "statistics#destroy"
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
