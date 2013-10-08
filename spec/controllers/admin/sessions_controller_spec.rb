@@ -25,6 +25,27 @@ describe Admin::SessionsController do
       expect(flash[:alert]).to eq "Username or password is incorrect."
       expect(session[:auth]).to be_nil
     end
+
+    context "admin settings" do
+      it "records appropriate settings" do
+        post :create, admin: {username: "admin", password: "secret"}
+
+        expect(AdminSettings.first.last_sign_in).to_not be_nil
+        expect(AdminSettings.first.failed_attempts).to eq 0
+      end
+
+      it "prevents sign in after too many failed attempts" do
+        settings = AdminSettings.first_or_initialize
+        settings.failed_attempts = AdminAuthenticator::NUM_FAILED_ATTEMPTS - 1
+        settings.save
+
+        post :create, admin: {username: "not", password: "good"}
+        expect(AdminSettings.first.failed_attempts).to eq AdminAuthenticator::NUM_FAILED_ATTEMPTS
+
+        post :create, admin: {username: "admin", password: "secret"}
+        expect(flash[:alert]).to match /this account is locked/i
+      end
+    end
   end
 
   describe "#destroy" do

@@ -1,6 +1,8 @@
 class AdminAuthenticator
 
-  attr_reader :session, :auth_params
+  NUM_FAILED_ATTEMPTS = 10
+
+  attr_reader :session, :auth_params, :error_message
 
   def initialize(session, auth_params = nil)
     @session = session
@@ -13,11 +15,16 @@ class AdminAuthenticator
   end
 
   def sign_in
-    if username_and_password_match?
+    return false if admin_locked?
+    if username_and_password_valid?
       session[:auth] = { authorized: true, expire_at: 2.weeks.from_now }
-      return true
+      log_sign_in
+      true
+    else
+      @error_message = "Username or password is incorrect."
+      log_failed_attempt
+      false
     end
-    false
   end
 
   def sign_out
@@ -26,9 +33,28 @@ class AdminAuthenticator
 
   private
 
-  def username_and_password_match?
+  def log_failed_attempt
+    AdminSettings.first_or_initialize.increment!(:failed_attempts)
+  end
+
+  def log_sign_in
+    settings = AdminSettings.first_or_initialize
+    settings.last_sign_in = Time.now
+    settings.save
+  end
+
+  def username_and_password_valid?
     (auth_params[:username] == ENV['USERNAME']) &&
         (auth_params[:password] == ENV['PASSWORD'])
+  end
+
+  def admin_locked?
+    failed_attempts = AdminSettings.first_or_initialize.failed_attempts.to_i
+    if failed_attempts >= NUM_FAILED_ATTEMPTS
+      @error_message = "Unable to sign in.  This account is locked."
+      return true
+    end
+    false
   end
 
 end

@@ -4,24 +4,18 @@ class Admin::SessionsController < ApplicationController
   end
 
   def create
+    authenticator = AdminAuthenticator.new(session, params[:admin])
     if authenticator.sign_in
       redirect_to admin_statistics_path
     else
-      flash[:alert] = "Username or password is incorrect."
+      flash[:alert] = authenticator.error_message
       render :new
     end
-
   end
 
   def destroy
-    authenticator.sign_out
+    AdminAuthenticator.new(session).sign_out
     redirect_to new_admin_session_path, notice: "You have been signed out."
-  end
-
-  private
-
-  def authenticator
-    AdminAuthenticator.new(session, params[:admin])
   end
 
 end
