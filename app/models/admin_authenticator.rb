@@ -50,11 +50,8 @@ class AdminAuthenticator
 
   def admin_locked?
     failed_attempts = AdminSettings.first_or_initialize.failed_attempts.to_i
-    if failed_attempts >= NUM_FAILED_ATTEMPTS
-      @error_message = "Unable to sign in.  This account is locked."
-      return true
+    (failed_attempts >= NUM_FAILED_ATTEMPTS).tap do |locked|
+      @error_message = "Unable to sign in.  This account is locked." if locked
     end
-    false
   end
-
 end
