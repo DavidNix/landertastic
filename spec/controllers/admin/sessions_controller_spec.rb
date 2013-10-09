@@ -8,6 +8,11 @@ describe Admin::SessionsController do
       get :new
       expect(response).to be_success
     end
+
+    it "renders correct layout" do
+      get :new
+      expect(response).to render_template("layouts/admin")
+    end
   end
 
   describe "#create" do
