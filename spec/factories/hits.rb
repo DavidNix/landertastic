@@ -1,7 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :lead do
-    sequence(:email) { |n| "test#{n}@email.com" }
+  factory :hit do
+    ip_address "0.0.0.0"
+    user_agent "Mozilla"
   end
 end
