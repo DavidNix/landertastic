@@ -18,7 +18,7 @@ class AdminAuthenticator
     return false if admin_locked?
     if username_and_password_valid?
       session[:auth] = { authorized: true, expire_at: 2.weeks.from_now }
-      log_sign_in
+      log_and_reset_admin_settings
       true
     else
       @error_message = "Username or password is incorrect."
@@ -33,14 +33,18 @@ class AdminAuthenticator
 
   private
 
-  def log_failed_attempt
-    AdminSettings.first_or_initialize.increment!(:failed_attempts)
+  def admin_record
+    @admin_record ||= AdminSettings.first_or_initialize
   end
 
-  def log_sign_in
-    settings = AdminSettings.first_or_initialize
-    settings.last_sign_in = Time.now
-    settings.save
+  def log_and_reset_admin_settings
+    admin_record.failed_attempts = 0
+    admin_record.last_sign_in = Time.now
+    admin_record.save
+  end
+
+  def log_failed_attempt
+    admin_record.increment!(:failed_attempts)
   end
 
   def username_and_password_valid?
@@ -49,7 +53,7 @@ class AdminAuthenticator
   end
 
   def admin_locked?
-    failed_attempts = AdminSettings.first_or_initialize.failed_attempts.to_i
+    failed_attempts = admin_record.failed_attempts.to_i
     (failed_attempts >= NUM_FAILED_ATTEMPTS).tap do |locked|
       @error_message = "Unable to sign in.  This account is locked." if locked
     end

@@ -46,6 +46,12 @@ describe Admin::SessionsController do
         expect(AdminSettings.first.failed_attempts).to eq 0
       end
 
+      it "only creates on admin settings record" do
+        3.times { post :create, admin: {username: "admin", password: "secret"} }
+
+        expect(AdminSettings.count).to eq 1
+      end
+
       it "prevents sign in after too many failed attempts" do
         settings = AdminSettings.first_or_initialize
         settings.failed_attempts = AdminAuthenticator::NUM_FAILED_ATTEMPTS - 1
@@ -56,6 +62,15 @@ describe Admin::SessionsController do
 
         post :create, admin: {username: "admin", password: "secret"}
         expect(flash[:alert]).to match /this account is locked/i
+      end
+
+      it "resets failed attempts after successful sign in" do
+        settings = AdminSettings.first_or_initialize
+        settings.failed_attempts = 9
+        settings.save
+        post :create, admin: {username: "admin", password: "secret"}
+
+        expect(AdminSettings.first.failed_attempts).to eq 0
       end
     end
   end
