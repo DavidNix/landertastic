@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe StatGenerator do
+describe StatPresenter do
 
-  subject { StatGenerator }
+  subject { StatPresenter }
 
   before do
     5.times { |i| create(:hit, created_at: i.days.ago) }

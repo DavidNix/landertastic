@@ -1,4 +1,4 @@
-class StatGenerator
+class StatPresenter
   include ActionView::Helpers::NumberHelper
 
   attr_reader :start_time
