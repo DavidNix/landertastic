@@ -29,12 +29,24 @@ describe Admin::StatisticsController do
     end
     it "destroys all data and redirects" do
       sign_in_admin
+      AdminSettings.stub(:first).and_return(AdminSettings.new)
+      AdminSettings.any_instance.stub(:update_attribute)
       delete :destroy
 
       expect(Lead.count).to eq 0
       expect(Hit.count).to eq 0
       expect(flash[:notice]).to_not be_nil
       expect(response).to redirect_to(admin_statistics_path)
+    end
+
+    it "resets admin experiment start date" do
+      sign_in_admin
+      settings = AdminSettings.first_or_initialize
+      settings.save
+      settings.update_attribute(:experiment_start_date, 1.day.ago)
+
+      delete :destroy
+      expect(AdminSettings.first.experiment_start_date).to be > 5.seconds.ago
     end
 
     it "does not allow unauthenticated admin to destroy data" do
