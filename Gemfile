@@ -36,6 +36,10 @@ gem 'turbolinks'
 gem 'haml'
 gem 'haml-rails'
 
+# frontend framework
+gem 'compass-rails'
+gem 'zurb-foundation', '~> 4.0.0'
+
 # use pry instead of irb
 gem 'pry'
 
