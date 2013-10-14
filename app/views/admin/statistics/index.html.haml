@@ -1,0 +1,19 @@
+#statistics
+  .row
+    .large-4.columns
+      %h2 Total Hits
+      %p= @statistics.total_hits
+    .large-4.columns
+      %h2 Total Leads
+      %p= @statistics.total_leads
+    .large-4.columns
+      %h2 Conversion Rate
+      %p= @statistics.conversion_rate
+
+  .row
+    .large-12.columns
+      %span
+        = "Experiment began on: May 1, 2013"
+      %span
+        -#= @statistics.running_time
+        = "(7 days ago)"

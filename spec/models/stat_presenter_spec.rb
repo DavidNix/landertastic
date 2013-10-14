@@ -4,12 +4,13 @@ describe StatPresenter do
 
   subject { StatPresenter }
 
-  before do
+  def create_data
     5.times { |i| create(:hit, created_at: i.days.ago) }
     create(:lead)
   end
 
   describe "#total_hits" do
+    before { create_data }
     it "calculates total hits since the beginning" do
       expect(subject.new.total_hits).to eq 5
     end
@@ -19,21 +20,53 @@ describe StatPresenter do
     end
   end
 
-  describe "#conversion_ratio" do
-    it "calculates expected percentage since the beginning" do
-      expect(subject.new.conversion_rate).to eq "20.00%"
+  describe "#total_leads" do
+    before { create_data }
+    it "calculates leads since the beginning" do
+      2.times { create(:lead) }
+      expect(subject.new.total_leads).to eq 3
     end
 
-    it "calculates expected percentage since a time range" do
-      expect(subject.new(since: 25.hours.ago).conversion_rate).to eq "50.00%"
+    it "calculates leads since a time range" do
+      create(:lead, created_at: 1.week.ago)
+      expect(subject.new(since: 25.hours.ago).total_leads).to eq 1
     end
   end
 
-  describe "#reset" do
-    it "destroys all hits" do
-      subject.new.reset
-      expect(Hit.count).to eq 0
-      expect(Lead.count).to eq 1
+  describe "#conversion_ratio" do
+    context "without data" do
+      it "returns 0%" do
+        expect(subject.new.conversion_rate).to eq "0.00%"
+      end
+    end
+
+    context "with data" do
+      before { create_data }
+      it "calculates expected percentage since the beginning" do
+        expect(subject.new.conversion_rate).to eq "20.00%"
+      end
+
+      it "calculates expected percentage since a time range" do
+        expect(subject.new(since: 25.hours.ago).conversion_rate).to eq "50.00%"
+      end
+    end
+  end
+
+  describe "#began date" do
+    it "calculates expected began date" do
+      date = 3.days.ago
+      create(:hit, created_at: date)
+      3.times { create(:hit, created_at: Time.now) }
+
+      expect(subject.new.began_date.to_i).to eq date.to_i
+    end
+  end
+
+  describe "#running_time" do
+    it "calculates running time" do
+      create(:hit, created_at: 1.week.ago)
+
+      expect(subject.new.running_time).to eq "7 days"
     end
   end
 end

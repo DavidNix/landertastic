@@ -9,7 +9,7 @@ class Admin::SessionsController < ApplicationController
     if authenticator.sign_in
       redirect_to admin_statistics_path
     else
-      flash[:alert] = authenticator.error_message
+      flash.now[:alert] = authenticator.error_message
       render :new
     end
   end
