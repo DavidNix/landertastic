@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   layout :application_or_admin
 
+  def admin_authenticated?
+    AdminAuthenticator.new(session).authenticated?
+  end
+
   private
 
   def application_or_admin

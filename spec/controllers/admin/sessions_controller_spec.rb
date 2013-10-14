@@ -13,6 +13,13 @@ describe Admin::SessionsController do
       get :new
       expect(response).to render_template("layouts/admin")
     end
+
+    it "redirects already authenticated admin" do
+      sign_in_admin
+      get :new
+
+      expect(response).to redirect_to(admin_statistics_path)
+    end
   end
 
   describe "#create" do

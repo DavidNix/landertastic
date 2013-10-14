@@ -1,6 +1,7 @@
 class Admin::SessionsController < ApplicationController
 
   def new
+    redirect_to admin_statistics_path if admin_authenticated?
   end
 
   def create

@@ -1,10 +1,6 @@
 class AuthenticatedController < ApplicationController
   before_action :authenticate_admin!
 
-  def admin_authenticated?
-    AdminAuthenticator.new(session).authenticated?
-  end
-
   private
 
   def authenticate_admin!

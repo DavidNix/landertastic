@@ -1,0 +1,7 @@
+- if flash.any?
+  .row
+    .large-10.large-centered.columns
+      - flash.each do |name, msg|
+        %div{ data: {alert: ""}, class: "alert-box radius #{name == :notice ? "success" : "alert"}" }
+          = msg
+          %a{href: "#", class: "close"} &times;

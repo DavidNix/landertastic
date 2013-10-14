@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    record_hit unless AdminAuthenticator.new(session).authenticated?
+    record_hit unless admin_authenticated?
   end
 
   private
