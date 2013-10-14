@@ -17,3 +17,7 @@
       %span
         -#= @statistics.running_time
         = "(7 days ago)"
+
+  .row
+    .large-3.large-centered.columns
+      = link_to "Reset Statistics", admin_statistics_path, method: :delete, confirm: "Delete all statistics? This action cannot be undone.", class: "button alert radius"
