@@ -23,4 +23,17 @@ describe LeadsController do
       }.to change(Lead, :count).by(0)
     end
   end
+
+  describe "#index" do
+    it "sends a text file of leads" do
+      3.times { |i| create(:lead, email: "#{i}@test.com") }
+      get :index
+
+      expect(response).to be_success
+      expect(response.content_type).to eq "text/plain"
+      expect(response.headers['Content-Disposition']).to match /attachment; filename=\"leads-.+\.txt\"/
+
+      expect(response.body).to eq "0@test.com\n1@test.com\n2@test.com"
+    end
+  end
 end

@@ -5,6 +5,13 @@ class LeadsController < ApplicationController
     head :ok
   end
 
+  def index
+    send_data(
+        Lead.pluck(:email).join("\n"),
+        filename: "leads-#{Time.now.to_i}.txt"
+    )
+  end
+
   private
 
   def lead_params
