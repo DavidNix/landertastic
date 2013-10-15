@@ -1,5 +1,35 @@
 @import "../foundation_and_overrides";
 
+$primary-color: #63b1e2;
+$callout-color: #ffd170;
+$alert-color: #ff8770;
+
+$body-bg: red;
+
+body.admin {
+  background: image-url("admin-background.jpg") repeat;
+}
+
+nav.top-bar {
+  background-color: $primary-color;
+
+  ul.right li a {
+    background-color: $primary-color;
+    &:hover {
+      background-color: darken($primary-color, 15%);
+    }
+  }
+}
+
+.button.call-to-action {
+  background-color: $callout-color;
+  border-color: slategray;
+
+  &:hover {
+    background-color: darken($callout-color, 15%);
+  }
+}
+
 #login {
   form {
     margin-bottom: 0;
@@ -19,4 +49,19 @@
     line-height: 1em;
     margin-bottom: 20px;
   }
+
+  #experiment {
+    text-align: center;
+    font-size: 1.3em;
+    padding: 20px 0 60px 0;
+  }
+
+  .button.alert {
+    background-color: $alert-color;
+
+    &:hover {
+      background-color: darken($alert-color, 20%);
+    }
+  }
+
 }
