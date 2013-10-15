@@ -13,10 +13,9 @@
   .row
     #experiment.large-6.large-centered.columns
       %span
-        = "Experiment began on: May 1, 2013"
+        = "Experiment began on:  #{@statistics.began_date}"
       %span
-        -#= @statistics.running_time
-        = "(7 days ago)"
+        = " (#{@statistics.running_time} ago)"
 
   .row
     .large-2.large-offset-4.columns

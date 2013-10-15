@@ -52,8 +52,13 @@ nav.top-bar {
 
   #experiment {
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.1em;
     padding: 20px 0 60px 0;
+
+    span:last-child {
+      color: lighten($body-font-color, 50%);
+      font-size: 0.9em;
+    }
   }
 
   .button.alert {

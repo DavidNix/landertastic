@@ -23,12 +23,11 @@ class StatPresenter
   end
 
   def began_date
-    #first_date = Hit.order('created_at asc').first.try(:created_at)
-    #first_date.to_s || "No hit recorded yet."
+    admin_start_date.strftime("%b %-d, %Y")
   end
 
   def running_time
-    #distance_of_time_in_words_to_now(began_date)
+    distance_of_time_in_words_to_now(admin_start_date)
   end
 
   private
@@ -36,5 +35,9 @@ class StatPresenter
   def count(klass)
     return klass.count if start_time.blank?
     klass.where('created_at > ?', start_time).count
+  end
+
+  def admin_start_date
+    AdminSettings.first.experiment_start_date
   end
 end

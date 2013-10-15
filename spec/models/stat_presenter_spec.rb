@@ -54,17 +54,20 @@ describe StatPresenter do
 
   describe "#began date" do
     it "calculates expected began date" do
-      date = 3.days.ago
-      create(:hit, created_at: date)
-      3.times { create(:hit, created_at: Time.now) }
+      date = "Oct 1 2013".to_date
+      admin = create(:admin_setting)
+      admin.experiment_start_date = date
+      admin.save
 
-      expect(subject.new.began_date.to_i).to eq date.to_i
+      expect(subject.new.began_date.to_date).to eq date
     end
   end
 
   describe "#running_time" do
     it "calculates running time" do
-      create(:hit, created_at: 1.week.ago)
+      admin = create(:admin_setting)
+      admin.experiment_start_date = 1.week.ago
+      admin.save
 
       expect(subject.new.running_time).to eq "7 days"
     end
