@@ -1,6 +1,6 @@
 class Admin::StatisticsController < AuthenticatedController
 
-  def index
+  def show
     @statistics = StatPresenter.new
   end
 

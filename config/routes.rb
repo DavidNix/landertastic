@@ -5,13 +5,8 @@ Landertastic::Application.routes.draw do
   resources :leads, only: [:create, :index]
 
   namespace :admin do
-    resources :sessions, only: [:new, :create]
-    delete "/sessions" => "sessions#destroy"
-
-    resources :statistics, only: [:index]
-    delete "/statistics" => "statistics#destroy"
-
-    resources :settings, only: [:index]
-    patch "/settings" => "settings#update", as: "update_settings"
+    resource :sessions, only: [:new, :create, :destroy]
+    resource :statistics, only: [:show, :destroy]
+    resource :settings, only: [:edit, :update]
   end
 end

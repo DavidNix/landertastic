@@ -1,0 +1,26 @@
+#statistics
+  .row
+    .large-4.columns
+      .panel
+        %h2 Total Hits
+        %p= @statistics.total_hits
+    .large-4.columns
+      .panel
+        %h2 Total Leads
+        %p= @statistics.total_leads
+    .large-4.columns
+      .panel
+        %h2 Conversion Rate
+        %p= @statistics.conversion_rate
+
+  .row
+    #experiment.large-6.large-centered.columns
+      %span
+        = "Experiment began on:  #{@statistics.began_date}"
+      %span
+        = " (#{@statistics.running_time} ago)"
+
+  .row
+    .large-2.large-centered.columns
+      = link_to "Get Leads", leads_path, class: "button call-to-action radius expand"
+    .large-4.columns

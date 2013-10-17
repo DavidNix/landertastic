@@ -82,7 +82,7 @@ describe Admin::SessionsController do
       delete :destroy
 
       expect(session[:auth]).to be_nil
-      expect(response).to redirect_to(new_admin_session_path)
+      expect(response).to redirect_to(new_admin_sessions_path)
       expect(flash[:notice]).to eq "You have been signed out."
     end
   end

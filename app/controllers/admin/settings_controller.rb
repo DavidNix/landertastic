@@ -1,16 +1,19 @@
 class Admin::SettingsController < AuthenticatedController
 
-  def index
+  def edit
     @settings = AdminSettings.first
   end
 
   def update
-    if AdminSettings.first.update_attributes(admin_params)
-      flash.now[:notice] = "Your settings were successfully changed!"
+    @settings = AdminSettings.first
+    if @settings.update_attributes(admin_params)
+      flash[:notice] = "Your settings were successfully changed!"
+      redirect_to edit_admin_settings_path
     else
-      flash.now[:alert] = "Sorry, something went wrong saving your settings."
+      flash[:alert] = @settings.errors.messages
+      #flash[:alert] = "Sorry, something went wrong saving your settings."
+      render :edit
     end
-    render :index
   end
 
   private

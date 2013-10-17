@@ -68,5 +68,14 @@ nav.top-bar {
       background-color: darken($alert-color, 20%);
     }
   }
+}
 
+#settings {
+  .panel h2 {
+    font-size: 1.9em;
+  }
+  form {
+    margin-bottom: 0;
+    .button { margin-bottom: 0; }
+  }
 }

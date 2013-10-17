@@ -1,0 +1,13 @@
+#settings
+  .large-6.large-offset-3.columns
+    .panel
+      %h2 Settings
+      = form_for :admin_settings, url: admin_settings_path, method: :patch do |f|
+        = f.label "Your email for notifications *"
+        = f.text_field :email, value: @settings.email
+        = f.label "Site Name/Title *"
+        = f.text_field :site_name, value: @settings.site_name
+        = f.submit "Save", class: "button expand call-to-action"
+
+  .large-2.columns
+    = link_to "Reset", admin_statistics_path, method: :delete, confirm: "Delete all hits and leads? This action cannot be undone.", class: "button alert radius expand"

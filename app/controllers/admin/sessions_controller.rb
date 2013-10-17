@@ -16,7 +16,7 @@ class Admin::SessionsController < ApplicationController
 
   def destroy
     AdminAuthenticator.new(session).sign_out
-    redirect_to new_admin_session_path, notice: "You have been signed out."
+    redirect_to new_admin_sessions_path, notice: "You have been signed out."
   end
 
 end

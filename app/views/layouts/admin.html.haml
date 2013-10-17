@@ -23,9 +23,14 @@
       %li.name
         %h1
           = link_to "Landertastic Admin", admin_path
+      %li.toggle-topbar.menu-icon
+        %a{href: "#"}
+          %span
     %section.top-bar-section
       %ul.right
         - if controller.admin_authenticated?
+          %li
+            = link_to "Settings", edit_admin_settings_path
           %li
             = link_to "Sign Out", admin_sessions_path, method: :delete
 
