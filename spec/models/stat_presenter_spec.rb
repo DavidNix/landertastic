@@ -55,7 +55,7 @@ describe StatPresenter do
   describe "#began date" do
     it "calculates expected began date" do
       date = "Oct 1 2013".to_date
-      admin = create(:admin_setting)
+      admin = create(:admin_settings)
       admin.experiment_start_date = date
       admin.save
 
@@ -65,7 +65,7 @@ describe StatPresenter do
 
   describe "#running_time" do
     it "calculates running time" do
-      admin = create(:admin_setting)
+      admin = create(:admin_settings)
       admin.experiment_start_date = 1.week.ago
       admin.save
 
