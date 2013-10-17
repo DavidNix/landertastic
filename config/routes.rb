@@ -10,5 +10,8 @@ Landertastic::Application.routes.draw do
 
     resources :statistics, only: [:index]
     delete "/statistics" => "statistics#destroy"
+
+    resources :settings, only: [:index]
+    patch "/settings" => "settings#update", as: "update_settings"
   end
 end
