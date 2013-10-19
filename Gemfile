@@ -82,6 +82,9 @@ group :development do
 
   # init processes via Procfile (used by Heroku)
   gem 'foreman'
+  
+  # inspect outgoing emails (run `mailcatcher` in the command line)
+  gem 'mailcatcher'
 end
 
 group :test do
