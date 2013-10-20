@@ -1,5 +1,5 @@
-A Landing Page App
-=======================
+# Landertastic
+### A Landing Page App and Business Idea Testing App
 
 A little app to display a landing page with the sole purpose of capturing emails.  I built this app to help me test potential business and side project ideas.  The app is built for deployment to Heroku.
 
