@@ -14,8 +14,6 @@ Lockable authentication (admin account locks after 10 failed attempts).
 
 Schedule daily emails with statistics of the last 24 hours.  (No need to constantly log into the admin section of the site.)
 
-
-
 ## Configuration
 * The `root_url` is the page to show your visitors.
 * Rspec for test suite
@@ -31,7 +29,7 @@ Rename `database.yml.sample` and `.env.sample` to match your environment setting
 
 Set up ActionMailer settings as usual for production environment if you want emails sent to you.
 
-Use heroku scheduler to schedule `rake:daily_stats` if you want a notification of the latest stats for the last 24 hours.
+Use heroku scheduler to schedule `rake stats:daily` if you want a notification of the latest stats for the last 24 hours.
 
 Log into `/admin` and change the site name and email that you want daily stats sent to.
 
