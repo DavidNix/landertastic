@@ -1,0 +1,14 @@
+.row
+  .large-5.columns.large-centered
+    #email-submit-form
+      = form_for :lead, remote: true, url: leads_path, method: :post do |f|
+        .lead-email
+          = f.label :email
+          = f.text_field :email
+        = f.submit "Subscribe"
+
+    #success-overlay
+      %p You have subscribed.  Thank you!
+
+:javascript
+  SubmitEmail();

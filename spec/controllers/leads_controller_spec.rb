@@ -10,6 +10,12 @@ describe LeadsController do
       expect(Lead.last.email).to eq "test@example.com"
     end
 
+    it "returns non-success response for invalid data" do
+      post :create, lead: { email: "not valid" }
+
+      expect(response.status).to eq 422
+    end
+
     it "only allows permitted params" do
       expect {
         post :create, lead: { created_at: Time.now }

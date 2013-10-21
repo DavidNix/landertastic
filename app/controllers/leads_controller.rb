@@ -1,8 +1,12 @@
 class LeadsController < ApplicationController
 
   def create
-    Lead.create(lead_params)
-    head :ok
+    lead = Lead.new(lead_params)
+    if lead.save
+      head :ok
+    else
+      head status: :unprocessable_entity
+    end
   end
 
   def index
