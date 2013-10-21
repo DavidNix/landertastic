@@ -4,7 +4,7 @@
       = form_for :lead, remote: true, url: leads_path, method: :post do |f|
         .lead-email
           = f.label :email
-          = f.text_field :email
+          = f.text_field :email, type: "email", required: ''
         = f.submit "Subscribe"
 
     #success-overlay
