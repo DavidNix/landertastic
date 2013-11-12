@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require ./namespace
 //= require_tree .
 
 $(document).foundation();

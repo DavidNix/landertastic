@@ -1,4 +1,4 @@
-var SubmitEmail = function() {
+Landertastic.SubmitEmail = function() {
   var $overlay = $('#success-overlay');
 
   $('#email-submit-form').on('ajax:success', function() {
